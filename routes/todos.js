@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 var pg = require('pg');
-//var db;
 var conString;
+
 /* GET users listing. */
 //router.get('/', function(req, res) {
 //  //res.send('respond with a resource');
@@ -12,10 +12,9 @@ var conString;
 
 var env = process.env.NODE_ENV || 'development';
 if ('development' === env) {
-   // your code goes here
-    //console.log("test")
-    //if (!db) db = new pg.Client("postgres://yangzai@localhost/tododb");
     conString = 'postgres://yangzai@localhost/tododb'
+} else if ('production' === env) {
+    conString = process.env.DATABASE_URL
 }
 
 router.route('/')
