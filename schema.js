@@ -5,7 +5,7 @@ var pg = require('pg')
 
 client = new pg.Client(connectionString);
 client.connect();
-query = client.query('DROP TABLE IF EXIST users; DROP TABLE IF EXIST todos; \
+query = client.query('DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS todos; \
                      CREATE TABLE users (\
                         id SERIAL PRIMARY KEY, \
                         name TEXT NOT NULL UNIQUE\
