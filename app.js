@@ -58,14 +58,5 @@ app.use(function(err, req, res, next) {
     });
 });
 
-//app.configure('production', function(){
-//  app.set('db uri', 'bigdbserver/invoiceDB');
-//  app.set('log level', 'warningsOnly');
-//});
-//
-//app.configure('development', function(){
-//  app.set('db uri', 'mylocalbox/invoiceDB');
-//  app.set('log level', 'verbose');
-//});
 
 module.exports = app;
