@@ -1,3 +1,4 @@
+//pg
 var pg = require('pg')
   , connectionString = process.env.DATABASE_URL || 'postgres://yangzai@localhost:5432/tododb'
   , client
@@ -5,7 +6,7 @@ var pg = require('pg')
 
 client = new pg.Client(connectionString);
 client.connect();
-query = client.query('DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS todos; \
+query = client.query('DROP TABLE IF EXISTS todos; DROP TABLE IF EXISTS users; \
                      CREATE TABLE users (\
                         id SERIAL PRIMARY KEY, \
                         name TEXT NOT NULL UNIQUE\
@@ -20,3 +21,19 @@ query = client.query('DROP TABLE IF EXISTS users; DROP TABLE IF EXISTS todos; \
 	                       ON DELETE RESTRICT \
                     );');
 query.on('end', function() { client.end(); });
+
+
+//mongodb
+var MongoClient = require('mongodb').MongoClient;
+var mongoUri = process.env.MONGOLAB_URI ||
+  'mongodb://localhost/tododb';
+
+MongoClient.connect(mongoUri, function (err, db) {
+
+    var collection = db.collection('todos');
+    collection.ensureIndex( { name: 1, todo: 1 }, { unique: true }, function (err) {
+        if (err)
+            return console.error(err)
+        db.close();
+    });
+});
